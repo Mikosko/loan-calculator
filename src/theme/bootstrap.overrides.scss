@@ -2,6 +2,8 @@
  * Override Bootstrap styles that you can't modify via variables here.
  *
  */
+@import "../../node_modules/react-input-range/src/scss/index";
+@import "../../node_modules/react-select/scss/default";
 
 .navbar-brand {
   position: relative;

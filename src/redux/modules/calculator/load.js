@@ -6,15 +6,38 @@ const LOAD = 'calculator/LOAD';
 const LOAD_SUCCESS = 'calculator/LOAD_SUCCESS';
 const LOAD_FAIL = 'calculator/LOAD_FAIL';
 
+const AMOUNT_CHANGE = 'calculator/AMOUNT_CHANGE';
+const TERM_CHANGE = 'calculator/TERM_CHANGE';
+
 const initialState = {
   loading: false,
   loaded: false,
   data: null,
+  value: {
+    amount: 0,
+    term: 0
+  },
   error: null
 };
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
+    case AMOUNT_CHANGE:
+      return {
+        ...state,
+        value: {
+          ...state.value,
+          amount: action.data.amount
+        }
+      };
+    case TERM_CHANGE:
+      return {
+        ...state,
+        value: {
+          ...state.value,
+          term: action.data.term
+        }
+      };
     case LOAD:
       return {
         ...state,
@@ -26,6 +49,10 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: true,
         data: action.result,
+        value: {
+          amount: action.result.amountInterval.defaultValue,
+          term: action.result.termInterval.defaultValue
+        },
         error: null
       };
     case LOAD_FAIL: {
@@ -46,5 +73,23 @@ export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: (client) => client.get('/calculator/load')
+  };
+}
+
+export function changeAmount(amount) {
+  return {
+    type: AMOUNT_CHANGE,
+    data: {
+      amount
+    }
+  };
+}
+
+export function changeTerm(term) {
+  return {
+    type: TERM_CHANGE,
+    data: {
+      term
+    }
   };
 }

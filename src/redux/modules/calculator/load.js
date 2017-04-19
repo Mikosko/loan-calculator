@@ -15,6 +15,11 @@ const initialState = {
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
+    case LOAD:
+      return {
+        ...state,
+        loading: true
+      };
     case LOAD_SUCCESS:
       return {
         ...state,
@@ -23,13 +28,18 @@ export default function reducer(state = initialState, action = {}) {
         data: action.result,
         error: null
       };
+    case LOAD_FAIL: {
+      return {
+        ...state
+      };
+    }
     default:
       return state;
   }
 }
 
 export function isLoaded(globalState) {
-  return globalState.calculator && globalState.calculator.loaded;
+  return globalState.calculator.form && globalState.calculator.form.loaded;
 }
 
 export function load() {

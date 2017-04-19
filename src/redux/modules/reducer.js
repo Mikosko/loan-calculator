@@ -8,13 +8,17 @@ import counter from './counter';
 import {reducer as form} from 'redux-form';
 import info from './info';
 import widgets from './widgets';
-import calculator from './calculator';
+import * as calculator from './calculator';
 
 export default combineReducers({
   routing: routerReducer,
   reduxAsyncConnect,
   auth,
   form,
+  calculator: combineReducers({
+    form: calculator.CalculatorLoad,
+    result: calculator.CalculatorCalculate
+  }),
   multireducer: multireducer({
     counter1: counter,
     counter2: counter,
@@ -22,6 +26,5 @@ export default combineReducers({
   }),
   info,
   pagination,
-  widgets,
-  calculator
+  widgets
 });

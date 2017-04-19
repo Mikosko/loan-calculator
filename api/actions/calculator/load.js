@@ -1,26 +1,14 @@
 /**
  * Created by Mikos on 19.04.2017.
  */
+import {URL} from '../../config';
+import axios from 'axios';
 
-const initialState = {
-  "amountInterval": {
-    "min": 10,
-    "max": 2000,
-    "step": 10,
-    "defaultValue": 400
-  },
-  "termInterval": {
-    "min": 3,
-    "max": 30,
-    "step": 1,
-    "defaultValue": 15
+export default async function load() {
+  try {
+    const response = await axios.get(`${URL}/constraints`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
   }
-};
-
-export default function load() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(initialState);
-    }, 1000);
-  });
 }

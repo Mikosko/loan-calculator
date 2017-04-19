@@ -3,7 +3,8 @@
  */
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {isLoaded, load as loadCalculator} from 'redux/modules/calculator';
+import {isLoaded, load as loadCalculator} from 'redux/modules/Calculator/load';
+import {calculate} from 'redux/modules/Calculator/calculate';
 import {asyncConnect} from 'redux-async-connect';
 
 @asyncConnect([{
@@ -18,22 +19,22 @@ import {asyncConnect} from 'redux-async-connect';
   state => ({
     calculator: state.calculator
   }),
-  {loadCalculator}
+  {loadCalculator, calculate}
 )
 export default
 class Calculator extends Component {
   static propTypes = {
     calculator: PropTypes.object,
-    loadCalculator: PropTypes.func
+    loadCalculator: PropTypes.func,
+    calculate: PropTypes.func
   }
 
   handleClick() {
     this.props.loadCalculator();
+    this.props.calculate(5000, 30);
   }
 
   render() {
-    const {calculator} = this.props;
-    console.log(calculator);
     return (
       <div>
         <h1 onClick={::this.handleClick}>Hello World</h1>

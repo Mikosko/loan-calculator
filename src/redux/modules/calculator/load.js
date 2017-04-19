@@ -76,7 +76,7 @@ export function load() {
   };
 }
 
-export function changeAmount(amount) {
+export function changeAmount(amount: number) {
   return {
     type: AMOUNT_CHANGE,
     data: {
@@ -85,7 +85,7 @@ export function changeAmount(amount) {
   };
 }
 
-export function changeTerm(term) {
+export function changeTerm(term: number) {
   return {
     type: TERM_CHANGE,
     data: {

@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {isLoaded as isCalculated, calculate} from 'redux/modules/calculator/calculate';
 import {isLoaded, load as loadCalculator} from 'redux/modules/calculator/load';
 import {asyncConnect} from 'redux-async-connect';
-import {CalculatorForm} from 'components';
+import {CalculatorForm, CalculatorResult} from 'components';
 
 @asyncConnect([
   {
@@ -36,10 +36,11 @@ class Calculator extends Component {
   }
 
   render() {
-    const {form} = this.props.calculator;
+    const {form, result} = this.props.calculator;
     return (
       <div>
         {form.loaded ? <CalculatorForm/> : <div>Loading...</div>}
+        {result.loaded ? <CalculatorResult/> : <div>Loading...</div>}
       </div>
     );
   }

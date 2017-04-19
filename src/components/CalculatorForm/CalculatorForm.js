@@ -49,7 +49,7 @@ class CalculatorForm extends Component {
     return optionsArray;
   }
 
-  @debounce(500)
+  @debounce
   handleCalculate() {
     this.props.calculate(this.props.value.amount, this.props.value.term);
   }
